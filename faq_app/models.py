@@ -2,44 +2,21 @@ from django.db import models
 from ckeditor.fields import RichTextField
 import asyncio
 from googletrans import Translator
-from django.core.cache import cache
-
+import json
+from .supported_languages import supp_lang
 
 class FAQ(models.Model):
     question = models.TextField()
     answer = RichTextField()
-    question_hi = models.TextField(blank=True, null=True)
-    question_bn = models.TextField(blank=True, null=True)
-    answer_hi = models.TextField(blank=True, null=True)
-    answer_bn = models.TextField(blank=True, null=True)
+    translations = models.JSONField(default=dict, blank=True)  # Store translations dynamically
 
-    def get_translated_question(self, lang):
-        cache_key = f"faq_{self.id}_question_{lang}"
-        translated_question = cache.get(cache_key)
-
-        if translated_question is None:
-            if lang == "hi" and self.question_hi:
-                translated_question = self.question_hi
-            elif lang == "bn" and self.question_bn:
-                translated_question = self.question_bn
-            else:
-                translated_question = self.question
-
-        return translated_question
-
-    def get_translated_answer(self, lang):
-        cache_key = f"faq_{self.id}_answer_{lang}"
-        translated_answer = cache.get(cache_key)
-
-        if translated_answer is None:
-            if lang == "hi" and self.answer_hi:
-                translated_answer = self.answer_hi
-            elif lang == "bn" and self.answer_bn:
-                translated_answer = self.answer_bn
-            else:
-                translated_answer = self.answer
-
-        return translated_answer
+    def get_translated_text(self, lang):
+        """
+        Retrieve translated question and answer for the given language.
+        """
+        if lang in self.translations:
+            return self.translations[lang].get("question", self.question), self.translations[lang].get("answer", self.answer)
+        return self.question, self.answer
 
     def translate_text(self, text, dest):
         translator = Translator()
@@ -49,12 +26,33 @@ class FAQ(models.Model):
         return result.text
 
     def save(self, *args, **kwargs):
-        if not self.question_hi:
-            self.question_hi = self.translate_text(self.question, "hi")
-        if not self.question_bn:
-            self.question_bn = self.translate_text(self.question, "bn")
-        if not self.answer_hi:
-            self.answer_hi = self.translate_text(self.answer, "hi")
-        if not self.answer_bn:
-            self.answer_bn = self.translate_text(self.answer, "bn")
+        """
+        Automatically translate the text into the selected language and store it in JSON format.
+        If the question/answer has changed, update translations.
+        """
+        if not self.translations:
+            self.translations = {}
+
+        # Fetch existing values from DB (if the object already exists)
+        if self.pk:
+            existing_faq = FAQ.objects.filter(pk=self.pk).first()
+            prev_question = existing_faq.question if existing_faq else None
+            prev_answer = existing_faq.answer if existing_faq else None
+        else:
+            prev_question = None
+            prev_answer = None
+
+        # Check if question or answer has changed
+        question_changed = prev_question != self.question
+        answer_changed = prev_answer != self.answer
+
+        for lang in supp_lang:
+            if lang not in self.translations or question_changed:
+                self.translations[lang] = self.translations.get(lang, {})
+                self.translations[lang]["question"] = self.translate_text(self.question, lang)
+
+            if lang not in self.translations or answer_changed:
+                self.translations[lang] = self.translations.get(lang, {})
+                self.translations[lang]["answer"] = self.translate_text(self.answer, lang)
+
         super().save(*args, **kwargs)
