@@ -1,1 +1,1 @@
-supp_lang=["hi", "bn", "ar", "zh"]
+supp_lang = ["hi", "bn", "ar", "zh"]
