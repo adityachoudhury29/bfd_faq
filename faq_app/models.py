@@ -1,15 +1,17 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-from django.core.cache import cache
 import asyncio
 from googletrans import Translator
 from django.core.cache import cache
+
 
 class FAQ(models.Model):
     question = models.TextField()
     answer = RichTextField()
     question_hi = models.TextField(blank=True, null=True)
     question_bn = models.TextField(blank=True, null=True)
+    answer_hi = models.TextField(blank=True, null=True)
+    answer_bn = models.TextField(blank=True, null=True)
 
     def get_translated_question(self, lang):
         cache_key = f"faq_{self.id}_question_{lang}"
@@ -23,9 +25,21 @@ class FAQ(models.Model):
             else:
                 translated_question = self.question
 
-            cache.set(cache_key, translated_question, timeout=3600)
-
         return translated_question
+
+    def get_translated_answer(self, lang):
+        cache_key = f"faq_{self.id}_answer_{lang}"
+        translated_answer = cache.get(cache_key)
+
+        if translated_answer is None:
+            if lang == "hi" and self.answer_hi:
+                translated_answer = self.answer_hi
+            elif lang == "bn" and self.answer_bn:
+                translated_answer = self.answer_bn
+            else:
+                translated_answer = self.answer
+
+        return translated_answer
 
     def translate_text(self, text, dest):
         translator = Translator()
@@ -39,8 +53,8 @@ class FAQ(models.Model):
             self.question_hi = self.translate_text(self.question, "hi")
         if not self.question_bn:
             self.question_bn = self.translate_text(self.question, "bn")
-        
+        if not self.answer_hi:
+            self.answer_hi = self.translate_text(self.answer, "hi")
+        if not self.answer_bn:
+            self.answer_bn = self.translate_text(self.answer, "bn")
         super().save(*args, **kwargs)
-        # Invalidate cache when saving new data
-        cache.delete(f"faq_{self.id}_question_hi")
-        cache.delete(f"faq_{self.id}_question_bn")
