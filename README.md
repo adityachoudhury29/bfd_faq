@@ -3,7 +3,7 @@
 A Django-based project with an API to fetch frequently asked questions (FAQs) in different languages. The API automatically translates the FAQ questions and answers to supported languages using Google Translate.
 
 ## Installation
-
+(NOTE: Before running the project, ensure that the ports :8000, :6380 and :5432 are free)
 ### Local Setup
 
 1. **Clone the repository:**
