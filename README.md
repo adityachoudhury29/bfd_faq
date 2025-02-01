@@ -4,6 +4,7 @@ A Django-based project with an API to fetch frequently asked questions (FAQs) in
 
 ## Installation
 (NOTE: Before running the project, ensure that the ports :8000, :6380 and :5432 are free)
+
 ### Local Setup
 
 1. **Clone the repository:**
@@ -24,23 +25,44 @@ A Django-based project with an API to fetch frequently asked questions (FAQs) in
    pip install -r requirements.txt
    ```
 
-3. **Set up the database:**
-   Use the defalut sqlite database provided by django(Uncomment the sqlite configuration and comment the psql configuration in `settings.py`).
+3. **Install and run Redis(on separate terminal instance):**
+   - Install Redis on your system if it is not already installed.
+     - On Ubuntu/Debian:
+       ```bash
+       sudo apt update && sudo apt install redis
+       ```
+     - On macOS (using Homebrew):
+       ```bash
+       brew install redis
+       ```
+     - On Windows, use [Redis for Windows](https://github.com/microsoftarchive/redis/releases) or run Redis via WSL.
+
+   - Start the Redis server:
+     ```bash
+     redis-server
+     ```
+   Keep this terminal instance running.
+
+4. **Set up the database:**
+   Use the default SQLite database provided by Django (Uncomment the SQLite configuration and comment the PostgreSQL configuration in `settings.py`).
 
    Run migrations to set up the database:
    ```bash
    python manage.py migrate
    ```
 
-4. **Create a superuser (optional, for admin access):**
+5. **Create a superuser (optional, for admin access):**
    ```bash
    python manage.py createsuperuser
    ```
 
-5. **Run the development server:**
+6. **Run the development server:**
    ```bash
    python manage.py runserver
    ```
+
+7. **Access the application:**
+   Open your browser and visit [http://localhost:8000](http://localhost:8000) to see the live application.
 
 ### Docker Setup
 
