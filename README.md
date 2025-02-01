@@ -27,6 +27,11 @@ A Django-based project with an API to fetch frequently asked questions (FAQs) in
 3. **Set up the database:**
    Make sure PostgreSQL is installed and running. You can adjust the `DATABASES` settings in `settings.py` if needed. You can also use the default sqlite database provided by django(Uncomment the sqlite configuration and comment the psql configuration).
 
+   Setup .env variables and provide necessary credentials:
+   ```bash
+   cp .env.example .env
+   ```
+
    Run migrations to set up the database:
    ```bash
    python manage.py migrate
@@ -50,6 +55,10 @@ If you have Docker and Docker-compose installed and set up, you can use it as we
    ```bash
    git clone https://github.com/adityachoudhury29/bharatfd_task.git
    cd bharatfd_task
+   ```
+   Setup .env variables and provide necessary credentials:
+   ```bash
+   cp .env.example .env
    ```
 2. **Build containers using `docker-compose`:**
    ```bash
