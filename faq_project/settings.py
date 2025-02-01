@@ -86,25 +86,25 @@ CACHES = {
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-## For local setup
-# DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#         }
-#     }
+# For local setup
+DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 # For Docker setup
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DJANGO_DB_NAME', 'postgres'),
-        'USER': os.getenv('DJANGO_DB_USER', 'postgres'),
-        'PASSWORD': os.getenv('DJANGO_DB_PASSWORD', 'postgres'),
-        'HOST': os.getenv('DJANGO_DB_HOST', 'db'),
-        'PORT': os.getenv('DJANGO_DB_PORT', '5432'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DJANGO_DB_NAME', 'postgres'),
+#         'USER': os.getenv('DJANGO_DB_USER', 'postgres'),
+#         'PASSWORD': os.getenv('DJANGO_DB_PASSWORD', 'postgres'),
+#         'HOST': os.getenv('DJANGO_DB_HOST', 'db'),
+#         'PORT': os.getenv('DJANGO_DB_PORT', '5432'),
+#     }
+# }
 
 
 # Password validation
