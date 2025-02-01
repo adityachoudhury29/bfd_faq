@@ -46,23 +46,28 @@ A Django-based project with an API to fetch frequently asked questions (FAQs) in
 
 If you have Docker and Docker-compose installed and set up, you can use it as well:
 
-1. **Build containers using `docker-compose`:**
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/adityachoudhury29/bharatfd_task.git
+   cd bharatfd_task
+   ```
+2. **Build containers using `docker-compose`:**
    ```bash
    sudo docker-compose build
    ```
-2. **Start containers in detached mode:**
+3. **Start containers in detached mode:**
    ```bash
    sudo docker-compose up -d
    ```
-3. **Make migrations within docker:**
+4. **Make migrations within docker:**
    ```bash
    sudo docker-compose exec web python manage.py migrate
    ```
-4. **Create a superuser:**
+5. **Create a superuser:**
    ```bash
    sudo docker-compose exec web python manage.py createsuperuser
    ```
-5. **Access the app**:
+6. **Access the app**:
    The app will be available at [http://localhost:8000](http://localhost:8000).
 
 ---
