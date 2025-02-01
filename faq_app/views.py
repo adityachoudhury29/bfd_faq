@@ -6,7 +6,7 @@ from .models import FAQ
 
 class FAQListView(APIView):
     def get(self, request):
-        lang = request.GET.get("lang", "en")  # Get desired language
+        lang = request.GET.get("lang", "en")
         faqs = FAQ.objects.all()
         data = [
             {
