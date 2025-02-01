@@ -3,6 +3,7 @@ from ckeditor.fields import RichTextField
 import asyncio
 from googletrans import Translator
 from .supported_languages import supp_lang
+import json
 
 
 class FAQ(models.Model):
@@ -49,5 +50,8 @@ class FAQ(models.Model):
                 self.translations[lang] = self.translations.get(lang, {})
                 self.translations[lang]["answer"] = self.translate_text(
                     self.answer, lang)
+
+        formatted_json = json.dumps(self.translations, indent=4, ensure_ascii=False)
+        self.translations = formatted_json
 
         super().save(*args, **kwargs)

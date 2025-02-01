@@ -83,6 +83,11 @@ You can use the admin panel to view, create as well as edit API records, at [htt
 
 ---
 
+## To run tests
+You can run tests using the command: ```pytest```
+
+---
+
 ## API Usage
 
 You can interact with the API to fetch FAQs. Here are examples using `curl`:
@@ -134,7 +139,9 @@ You can interact with the API to fetch FAQs. Here are examples using `curl`:
 5. **Commit Changes**: 
    Make small, atomic commits with descriptive messages:
    ```bash
-   git commit -m "Add feature or fix issue"
+   git commit -m "feat: add feature"
+   #or
+   git commit -m "fix: fixed feature"
    ```
 
 6. **Push Changes**:

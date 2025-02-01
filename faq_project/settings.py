@@ -86,6 +86,7 @@ CACHES = {
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+## For local setup
 # DATABASES = {
 #         'default': {
 #             'ENGINE': 'django.db.backends.sqlite3',
@@ -93,6 +94,7 @@ CACHES = {
 #         }
 #     }
 
+# For Docker setup
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
