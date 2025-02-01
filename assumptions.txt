@@ -1,5 +1,5 @@
 Following assumptions were made while creating the project:
 
 1. Every single FAQ is available on each and every one of the supported languages.
-2. Supported languages can be updated as per admin's, directly in the codebase(faq_app/supported_languages.py).
-3. Redis port has been forwarded to :6380 unlike the conventional :6379.
+2. Supported languages for the API can be updated as per admin's requirements, directly in the codebase(faq_app/supported_languages.py).
+3. Redis port has been forwarded to :6380 unlike the conventional :6379 while using docker.

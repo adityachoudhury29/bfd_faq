@@ -1,43 +1,43 @@
 version: '3.8'
 
 services:
-  # Django Application
-  web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/app  # Mount the current directory into the container
-    ports:
-      - "8000:8000"  # Expose port 8000 for the Django server
-    depends_on:
-      - db
-      - redis
-    environment:
-      - DEBUG=True
-      - DJANGO_DB_HOST=${DJANGO_DB_HOST}
-      - DJANGO_DB_NAME=${DJANGO_DB_NAME}
-      - DJANGO_DB_USER=${DJANGO_DB_USER}
-      - DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD}
-      - DJANGO_DB_PORT=${DJANGO_DB_PORT}
-      - REDIS_URL=${REDIS_URL}
+    # Django Application
+    web:
+        build: .
+        command: python manage.py runserver 0.0.0.0: 8000
+        volumes:
+            - .: / app  # Mount the current directory into the container
+        ports:
+            - "8000:8000"  # Expose port 8000 for the Django server
+        depends_on:
+            - db
+            - redis
+        environment:
+            - DEBUG = True
+            - DJANGO_DB_HOST =${DJANGO_DB_HOST}
+            - DJANGO_DB_NAME =${DJANGO_DB_NAME}
+            - DJANGO_DB_USER =${DJANGO_DB_USER}
+            - DJANGO_DB_PASSWORD =${DJANGO_DB_PASSWORD}
+            - DJANGO_DB_PORT =${DJANGO_DB_PORT}
+            - REDIS_URL =${REDIS_URL}
 
-  # PostgreSQL Database
-  db:
-    image: postgres:13
-    volumes:
-      - postgres_data:/var/lib/postgresql/data  # Persist database data
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      - "5432:5432"
+    # PostgreSQL Database
+    db:
+        image: postgres: 13
+        volumes:
+            - postgres_data: / var / lib / postgresql / data  # Persist database data
+        environment:
+            - POSTGRES_DB =${POSTGRES_DB}
+            - POSTGRES_USER =${POSTGRES_USER}
+            - POSTGRES_PASSWORD =${POSTGRES_PASSWORD}
+        ports:
+            - "5432:5432"
 
-  # Redis Cache
-  redis:
-    image: redis:alpine
-    ports:
-      - "6380:6379"  # Expose Redis port
+    # Redis Cache
+    redis:
+        image: redis: alpine
+        ports:
+            - "6380:6379"  # Expose Redis port
 
 volumes:
-  postgres_data:  # Named volume for PostgreSQL data
+    postgres_data:  # Named volume for PostgreSQL data

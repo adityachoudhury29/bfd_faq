@@ -12,7 +12,8 @@ class FAQAdmin(admin.ModelAdmin):
             return ", ".join(translations.keys()) if translations else "No translations"
         except json.JSONDecodeError:
             return "Invalid JSON"
-    
+
     get_languages.short_description = "Available Translations"
+
 
 admin.site.register(FAQ, FAQAdmin)
