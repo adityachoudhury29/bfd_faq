@@ -3,7 +3,7 @@
 A Django-based project with an API to fetch frequently asked questions (FAQs) in different languages. The API automatically translates the FAQ questions and answers to supported languages using Google Translate.
 
 ## Installation
-(NOTE: Before running the project, ensure that the ports :8000, :6380 and :5432 are free)
+(NOTE: Before running the project, ensure that the ports :8000, :6379 and :5432 are free)
 
 ### Local Setup
 
@@ -20,7 +20,7 @@ A Django-based project with an API to fetch frequently asked questions (FAQs) in
    source myenv/bin/activate  # On Windows, use `myenv\Scripts\activate`
    ```
 
-   Install the required dependencies:
+   Install the required dependencies(for psycopg2 and its binary, first read comments in `requirements.txt`):
    ```bash
    pip install -r requirements.txt
    ```
