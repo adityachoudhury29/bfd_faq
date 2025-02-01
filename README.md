@@ -9,6 +9,7 @@ A Django-based project with an API to fetch frequently asked questions (FAQs) in
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/adityachoudhury29/bharatfd_task.git
+   cd bharatfd_task
    ```
 
 2. **Install dependencies:**
