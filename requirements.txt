@@ -35,9 +35,6 @@ sniffio
 sqlparse
 tomli
 typing_extensions
-## For Docker
+## Install the following 2 packages only for Docker. For local setup, ignore these 2
 psycopg2
 psycopg2-binary
-## For local setup
-# psycopg2==3.2.1
-# psycopg2-binary==2.9.9
