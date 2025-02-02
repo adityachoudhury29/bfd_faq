@@ -57,8 +57,4 @@ class FAQ(models.Model):
                 self.translations[lang]["answer"] = self.translate_text(
                     self.answer, lang)
 
-        # Format the JSON data for better readability
-        formatted_json = json.dumps(self.translations, indent=4, ensure_ascii=False)
-        self.translations = formatted_json
-
         super().save(*args, **kwargs)  # Call the parent class's save method to store data in the database
