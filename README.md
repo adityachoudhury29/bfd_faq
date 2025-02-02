@@ -9,8 +9,8 @@ A Django-based project with an API to fetch frequently asked questions (FAQs) in
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/adityachoudhury29/bharatfd_task.git
-   cd bharatfd_task
+   git clone https://github.com/adityachoudhury29/bfd_faq.git
+   cd bfd_faq
    ```
 
 2. **Install dependencies:**
@@ -70,8 +70,8 @@ If you have Docker and Docker-compose installed and set up, you can use it as we
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/adityachoudhury29/bharatfd_task.git
-   cd bharatfd_task
+   git clone https://github.com/adityachoudhury29/bfd_faq.git
+   cd bfd_faq
    ```
    Setup .env variables and provide necessary credentials:
    ```bash
